@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useDispatch } from "react-redux";
-import * as RootNavigate from "../../RootNavigation"
+// import * as RootNavigate from "../../RootNavigation"
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faFloppyDisk, faPenSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { deleteContact, updateContact } from "../actions/contacts";
+import { useNavigation } from "@react-navigation/native";
 
 export default function ContactData({ contact }: { contact: any }) {
+    const navigation: any = useNavigation();
     const dispatch: any = useDispatch()
     const [isEdite, setIsEdite] = useState(false);
     const [newData, setNewData] = useState({ name: contact.name, phone: contact.phone })
@@ -24,8 +26,8 @@ export default function ContactData({ contact }: { contact: any }) {
         return (
             <View style={style.dataBox}>
                 <View>
-                    <TouchableOpacity onPress={() => RootNavigate.navigate('Avatar')}>
-                        <Image style={style.avatar} source={{ uri: "http://192.168.1.50:3000/images/user-tie-solid.png" }} />
+                    <TouchableOpacity onPress={() => navigation.navigate('Avatar', { id: contact.id, avatar: contact.avatar })}>
+                        <Image style={style.avatar} source={{ uri: `http://192.168.1.50:3000/images/${contact.avatar ? contact.avatar : 'user-tie-solid.png'}` }} />
                     </TouchableOpacity>
                 </View>
                 <View style={style.identity}>
@@ -47,8 +49,8 @@ export default function ContactData({ contact }: { contact: any }) {
         return (
             <View style={style.dataBox}>
                 <View>
-                    <TouchableOpacity onPress={() => RootNavigate.navigate('Avatar')}>
-                        <Image style={style.avatar} source={{ uri: "http://192.168.1.50:3000/images/user-tie-solid.png" }} />
+                    <TouchableOpacity onPress={() => navigation.navigate('Avatar', { id: contact.id, avatar: contact.avatar })}>
+                        <Image style={style.avatar} source={{ uri: `http://192.168.1.50:3000/images/${contact.avatar ? contact.avatar : 'user-tie-solid.png'}` }} />
                     </TouchableOpacity>
                 </View>
                 <View style={style.identity}>
@@ -101,7 +103,7 @@ const style = StyleSheet.create({
         width: 100,
         height: 100,
         borderRadius: 50,
-        objectFit: 'contain',
+        objectFit: 'fill',
     },
     input: {
         backgroundColor: 'white',

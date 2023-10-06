@@ -2,9 +2,10 @@ import { faArrowDownAZ, faArrowDownZA, faMagnifyingGlass, faUserPlus } from "@fo
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { useState } from "react";
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
-import * as RootNavigate from "../../RootNavigation";
+import { useNavigation } from "@react-navigation/native";
 
 export default function ContactBar({ filter, sort }: { filter: any, sort: any }) {
+    const navigation: any = useNavigation()
     const [btnShow, setBtnShow] = useState(false)
     const btnClick = (type: string) => {
         sort(type);
@@ -23,7 +24,7 @@ export default function ContactBar({ filter, sort }: { filter: any, sort: any })
                 <FontAwesomeIcon size={25} icon={faMagnifyingGlass}/>
                 <TextInput style={style.input} onChangeText={newText => filter(newText)}/>
             </View>
-            <TouchableOpacity style={style.btnBar} onPress={() => RootNavigate.navigate('Add')}>
+            <TouchableOpacity style={style.btnBar} onPress={() => navigation.navigate('Add')}>
                 <FontAwesomeIcon size={25} icon={faUserPlus} />
             </TouchableOpacity>
         </View>

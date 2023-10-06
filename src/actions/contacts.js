@@ -36,6 +36,7 @@ export const updateAvatar = (id, file) => dispatch => request.put(`phonebooks/${
         'Content-Type': 'multipart/form-data'
       }
 }).then(({ data }) => {
+    console.log(data)
     dispatch({ type: 'UPDATE_AVATAR_SUCCESS', data })
 }).catch(() => {
     dispatch({ type: 'UPDATE_AVATAR_FAILED' })

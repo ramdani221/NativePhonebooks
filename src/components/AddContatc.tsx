@@ -2,16 +2,15 @@ import { useState } from "react";
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useDispatch } from "react-redux";
 import { addContact } from "../actions/contacts";
-import * as RootNavigate from "../../RootNavigation"
-import { faLeftRight } from "@fortawesome/free-solid-svg-icons";
+import { useNavigation } from "@react-navigation/native";
 
 export default function AddContact() {
-
+    const navigation: any = useNavigation()
     const dispatch: any = useDispatch()
     const [newContact, setNewContact] = useState({ name: '', phone: '' })
     const submit = () => {
         dispatch(addContact(newContact));
-        RootNavigate.navigate('Home');
+        navigation.goBack();
     }
 
     return (
@@ -22,7 +21,7 @@ export default function AddContact() {
                 <TouchableOpacity style={style.button} onPress={submit}>
                     <Text style={style.text}>Save</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={style.button} onPress={() => RootNavigate.navigate('Home')}>
+                <TouchableOpacity style={style.button} onPress={() => navigation.navigate('Home')}>
                     <Text style={style.text}>Cancel</Text>
                 </TouchableOpacity>
             </View>

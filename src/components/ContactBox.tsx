@@ -35,6 +35,5 @@ const style = StyleSheet.create({
         flex: 1,
         flexGrow: 1,
         gap: 10,
-        marginBottom: 40
     }
 })
