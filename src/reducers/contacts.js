@@ -17,7 +17,13 @@ const contacts = (state = { phonebooks: [], page: 1, limit: 10, total: 1, pages:
                 if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
                 return 0;
             });
-            return { ...state, ...update };
+            return {
+                ...state,
+                phonebooks: update.phonebooks.filter(contact => {
+                    return contact.name.toLowerCase().includes(state.keyword.toLowerCase()) ||
+                        contact.phone.toLowerCase().includes(state.keyword.toLowerCase())
+                })
+            };
         case 'DELETE_CONTACT_SUCCESS':
             return { ...state, phonebooks: state.phonebooks.filter((contacts) => contacts.id !== action.id) }
         case 'UPDATE_AVATAR_SUCCESS':
