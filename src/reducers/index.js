@@ -1,6 +1,4 @@
-import { combineReducers } from "@reduxjs/toolkit";
-import contacts from "./contacts";
+import {combineReducers} from '@reduxjs/toolkit';
+import contacts from './contacts';
 
-export default combineReducers ({
-    contacts
-})
+export default combineReducers({contacts});
